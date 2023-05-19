@@ -57,14 +57,19 @@ function App() {
           next={getNextFetch}
           hasMore={hasMore}
           loader={<Oval />} 
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>Yay! You have seen it all</b>
+            </p>
+          }
         >
-          {pokemons?.map((pokemon) => {
+          {pokemons?.map((pokemon,index) => {
             const linkId = pokemon.url.split("/").at(-2);
             return (
-              <Card style={{ width: "20rem", border: "1px solid gray" }}>
+              <Card key={index} style={{ width: "20rem", border: "1px solid gray" }}>
                 <Card.Body>
                   <Card.Title className="text-uppercase font-weight-bold">
-                    {pokemon.name}
+                    {linkId}. {pokemon.name}
                   </Card.Title>
                   <Link to={`/${linkId}`}>
                     <Button variant="success">Know More</Button>
