@@ -56,28 +56,34 @@ function App() {
           dataLength={pokemons ? pokemons.length : 0}
           next={getNextFetch}
           hasMore={hasMore}
-          loader={<Oval />} 
+          loader={<Oval />}
           endMessage={
-            <p style={{ textAlign: 'center' }}>
+            <p style={{ textAlign: "center" }}>
               <b>Yay! You have seen it all</b>
             </p>
           }
         >
-          {pokemons?.map((pokemon,index) => {
-            const linkId = pokemon.url.split("/").at(-2);
-            return (
-              <Card key={index} style={{ width: "20rem", border: "1px solid gray" }}>
-                <Card.Body>
-                  <Card.Title className="text-uppercase font-weight-bold">
-                    {linkId}. {pokemon.name}
-                  </Card.Title>
-                  <Link to={`/${linkId}`}>
-                    <Button variant="success">Know More</Button>
-                  </Link>
-                </Card.Body>
-              </Card>
-            );
-          })}
+          <div style={{display: "flex", flexDirection: "column", gap: "2em"}}>
+            {pokemons?.map((pokemon, index) => {
+              const linkId = pokemon.url.split("/").at(-2);
+              return (
+                <Card
+                  key={index}
+                  style={{ width: "20rem", border: "1px solid gray" }}
+                >
+                  <Card.Img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index+1}.png`}/>
+                  <Card.Body>
+                    <Card.Title className="text-uppercase font-weight-bold">
+                      {linkId}. {pokemon.name}
+                    </Card.Title>
+                    <Link to={`/${linkId}`}>
+                      <Button variant="success">Know More</Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </div>
         </InfiniteScroll>
 
         <Routes>
